@@ -48,19 +48,20 @@ public class Model {
 		return vertici;
 	}
 
-	public List<Adiacenza> getUtenteSimile(User u) {
+	public List<User> getUtenteSimile(User u) {
 		max=0;
-		List <Adiacenza> result= new LinkedList<>(); 
-		for (DefaultWeightedEdge e: grafo.edgeSet()) { //ciclo sugli archi
+		List <User> result= new LinkedList<>(); 
+		for (DefaultWeightedEdge e: grafo.edgesOf(u)) { //ciclo sugli archi
 			double p= grafo.getEdgeWeight(e); //peso= peso arco
 			if(p>max) {
 				max=p; 
 			}
 		}
-			for (DefaultWeightedEdge e: grafo.edgeSet()) {
+			for (DefaultWeightedEdge e: grafo.edgesOf(u)) {
 				double p= grafo.getEdgeWeight(e);
 				if(p==max) { //archi con peso uguale al peso max, li aggiungo alla lista result
-					 result.add(new Adiacenza(grafo.getEdgeSource(e), grafo.getEdgeTarget(e), (int)p));
+					User u2= Graphs.getOppositeVertex(this.grafo, e, u);
+					 result.add(u2);
 				}
 		}
 		

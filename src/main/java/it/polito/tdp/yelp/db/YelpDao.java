@@ -86,8 +86,8 @@ public class YelpDao {
 		String sql = "SELECT u.* "
 				+ "FROM users u, reviews r "
 				+ "WHERE u.user_id=r.user_id "
-				+ "GROUP BY u.user_id "
-				+ "HAVING COUNT(r.review_id)>=? ";
+				+ "GROUP BY u.user_id " 
+				+ "HAVING COUNT(r.review_id)>=?";
 		List<User> result = new ArrayList<User>();
 		Connection conn = DBConnect.getConnection();
 
@@ -123,7 +123,7 @@ public class YelpDao {
 				+ "FROM reviews r1, reviews r2 "
 				+ "WHERE r1.user_id>r2.user_id "
 				+ "AND r1.business_id=r2.business_id "
-				+ "AND r1.review_date= r2.review_date "
+				+ "AND YEAR(r1.review_date)= YEAR(r2.review_date) "
 				+ "AND YEAR(r1.review_date)=? "
 				+ "GROUP BY r1.user_id, r2.user_id ";
 		List<Adiacenza> result = new ArrayList<>();

@@ -74,10 +74,10 @@ public class FXMLController {
     	txtResult.clear();
     	User u= this.cmbUtente.getValue();
     	
-    	txtResult.appendText("\nArchi con peso max: ");
+    	txtResult.appendText("\nUtente più simile a: "+u+"\n");
     	
-    	for (Adiacenza ad: model.getUtenteSimile(u)) {
-    		txtResult.appendText("\n"+ad);
+    	for (User u1: model.getUtenteSimile(u)) {
+    		txtResult.appendText("\n"+u1);
     	}
     }
     
